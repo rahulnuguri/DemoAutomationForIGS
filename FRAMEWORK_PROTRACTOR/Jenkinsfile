@@ -1,0 +1,10 @@
+pipeline_version="v3.latest"
+// This will give you the latest version of v2 (i.e. v2.0.0, v2.0.1, v2.1.0, v2.1.4 ..., v2.n.n)
+
+
+timestamps {
+  node('cicd') {
+    cleanWs()
+    checkout([$class: 'GitSCM', branches: [[name: "master"]], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'MasterJenkins', url: 'https://stash.qvcdev.qvc.net/scm/devops/pipeline_ci_intermediate.git']]])
+    load './Jenkinsfile.groovy'}
+}
